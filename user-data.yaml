@@ -1,0 +1,42 @@
+#cloud-config
+ssh_pwauth: true
+
+hostname: opentofu-rocky-teste
+manage_etc_hosts: true
+
+chpasswd:
+  list: |
+    root:$6$icCsrgPFmUJ7y40/$2TligMlpR5P2FiFsjrxNZmmYsBmOkpd0sJ4Am/8x6Ko8grcjVf08ZKeUPgiGaNohkZSJrtqVCLKBxGZ6vDY4e1
+  expire: false
+
+users:
+  - name: aluno
+    gecos: "Usuário de Laboratório"
+    groups: wheel
+    shell: /bin/bash
+    sudo: ['ALL=(ALL:ALL) NOPASSWD:ALL']
+    lock_passwd: false
+    passwd: "$6$hTsm9OSnl0JnaIL/$h.UQHqWJaUkU9TEDrZ13xfkampt5imBmM7eap60MIW79cgE.qXj/JDv20RtbDM1iDFoR7UW8VWDJ1xIGQ9LMh."
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDhRcBsR4KZ9f8fq1Jtpkhg4j0dzCYpRFXGk2L59BYrp6cHt/cz7WE+NRpF5PwP0dvMK/Ai8Ab3jE5F4Gm6gmwvsQhQg8B7HXRu5f+TdOnnhdHhlriZlYvCcUS9C+Ys61gU7/WWiEpIrp4vFTo4zOKkraMKaIEABKXn0IbTXj0NP64xM3ArOj8G0Cy+XTHJtMR9HRyLRcvVQtgwPvyigNwyit9Tu2hYzqPDz3vSvX9mILaFh8IuWGxVa0+GdtfKOSMqnY4WymPHjl7pwkaBbpwC6zHMEVycP7WBmQbkD34NBbzGrK2n/NbM3CvMJ2YqhQ0iOt1pr/sgAIGzg0A+TvQ5 mdonato@aesthar
+
+package_update: true
+#package_upgrade: true
+
+packages:
+  - vim
+  - curl
+  - wget
+  - net-tools
+  - git
+  - tmux
+  - qemu-guest-agent
+  - bash-completion
+
+runcmd:
+  - timedatectl set-timezone America/Sao_Paulo
+  - localectl set-keymap br-abnt2
+  - echo "Lab provisionado com sucesso!" > /etc/motd
+  - systemctl enable --now qemu-guest-agent
+
+
