@@ -1,5 +1,3 @@
-Here is the technical US English translation:
-
 # Terraform Libvirt KVM – Basic Example
 
 This repository contains the **basic and essential** configuration files required to provision a virtual machine using **Terraform + Libvirt/KVM**, leveraging **cloud-init** for initial setup. It represents the **seed of a modular project** that later evolved into [Projeto-Terraform-Libvirt-KVM](https://github.com/donato-marcos/Projeto-Terraform-Libvirt-KVM).
